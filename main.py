@@ -4,7 +4,7 @@ from pprint import pprint
 
 voter_list = pandas.read_excel('MEC_Voter_Data.xls') #creates an iteratable object of the given excel file
 con = sqlite3.connect('Verify_Voters.db') #initializes connection to SQL database
-cur = con.cursor()
+cur = con.cursor() #initializes cursor object to navigate SQL Program 
 
 #Creates table in database, if it doesn't exist already
 try:
@@ -20,11 +20,12 @@ voter_count = 0
 #Adds all voters and data into dictionary and SQL database
 for row in voter_list.itertuples():
     voter_name = row._1 + " " + row._2
-    first_name = row._1.replace("'", "''")
-    last_name = row._2.replace("'", "''")
+    first_name = row._1.replace("'", "''") #Used to make names readable for SQL
+    last_name = row._2.replace("'", "''") #Used to make names readable for SQL
+    #Checks conditions for valid voting
     if voter_name not in valid_voter_dict:
         if row.Vote in valid_parties:
-            cur.execute(f"INSERT INTO valid_voters VALUES ('{first_name}', '{last_name}', '{row.Vote}');")
+            cur.execute(f"INSERT INTO valid_voters VALUES ('{first_name}', '{last_name}', '{row.Vote}');") #Adds to SQL table
             valid_voter_dict[voter_name]=row.Vote
             voter_count += 1
 
