@@ -45,12 +45,12 @@ class Voter:
             while option not in ["a","b","c"]:
                 option = input(" Please choose option a, b or c \n")
                 parties = {"a":"Socks and Crocs Reform League","b":"Pineapple Pizza Party","c":"Pronounced Jiff Union"}
-                valid_voter_dict[self.name] = parties[option]
-                global voter_count 
-                voter_count += 1
+            valid_voter_dict[self.name] = parties[option]
+            global voter_count 
+            voter_count += 1
                 
 
-p1 = Voter("Pillie Wai")
+p1 = Voter("Zula Place")
 p1.vote_now()    
 
 
